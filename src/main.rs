@@ -1,14 +1,4 @@
-
-/// This is the main file for the project
-/// 
-/// # Examples
-/// ```
-/// use std::io;
-/// use std::io::prelude::*;
-/// use std::fs::File;
-/// 
-/// let mut f = File::open("foo.txt").expect("Unable to open file");
-
+use glib::clone;
 use gtk4 as gtk;
 use gtk::prelude::*;
 use gtk::{glib, Application, ApplicationWindow};
