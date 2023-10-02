@@ -1,27 +1,24 @@
-use glib::clone;
-use gtk4 as gtk;
-use gtk::prelude::*;
-use gtk::{glib, Application, ApplicationWindow};
-fn main() -> glib::ExitCode {
-    let application = Application::builder().application_id("com.Navistar.GTKRustTimer").build();
 
-application.connect_activate(|app| {
-    let window = ApplicationWindow::builder()
-        .application(app)
-        .title("Navistar Rust Timer")
-        .default_width(350)
-        .default_height(70)
-        .build();
 
-    let button = Button::with_label("Click me!");
-    button.connect_clicked(|_| {
-        eprintln!("Clicked!");
-    });
-    window.set_child(Some(&button));
+use qt_core::{QTimer, SignalOfInt};
+use qt_widgets::QApplication;
+use qt_widgets::QMainWindow;
+use qt_widgets::QWidget;
+use qt_widgets::QVBoxLayout;
+use qt_widgets::QPushButton;
 
-    window.present();
-});
+fn main() {
+	#![windows_subsystem = "windows"]
 
-application.run()
-
+	use qt_core::{q_init_resource, qs};
+	use qt_gui::QGuiApplication;
+	use qt_qml::QQmlApplicationEngine;
+	
+	fn main() {
+	    QGuiApplication::init(|_| unsafe {
+		q_init_resource!("resources");
+		let _engine = QQmlApplicationEngine::from_q_string(&qs("qrc:/main.qml"));
+		QGuiApplication::exec()
+	    })
+	}
 }
